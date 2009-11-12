@@ -1,0 +1,66 @@
+#! /bin/sh
+
+# For RedHat and cousins:
+# chkconfig: - 99 01
+# description: records webcam streams to disk.
+# processname: record.py 
+
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+[ -r /etc/sysconfig/record ] && . /etc/sysconfig/record
+
+RETVAL=0
+name=record
+prog=/usr/local/bin/record.py
+lockfile=/var/lock/subsys/$name
+
+start()
+{
+	echo -n $"Starting $name: "
+	daemon --user=$user $prog $record_opts
+	RETVAL=$?
+	echo
+	[ $RETVAL = 0 ] && touch $lockfile
+	return $RETVAL
+}
+
+stop()
+{
+	echo -n $"Shutting down $name: "
+	pkill -f $prog
+	RETVAL=$?
+	echo
+	rm -f $lockfile
+	return $RETVAL
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	try-restart)
+		if [ -f $pidfile ]; then
+			stop
+			start
+		fi
+		;;
+	status)
+		status $name
+		RETVAL=$?
+		;;
+	*)
+		echo $"Usage: $0 {start|stop|restart|try-restart|status}"
+		RETVAL=3
+esac
+
+exit $RETVAL
+

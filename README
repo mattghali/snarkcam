@@ -1,0 +1,5 @@
+www: php and associated configs for webcam web interface.
+
+tornado: somewhat incomplete refactor of 'www' in tornado.
+
+record: script handling recording to disk and associated configs.

@@ -1,0 +1,18 @@
+BODY {
+   color:black;
+   background-color:LightGray;
+   font-family:sans-serif;
+}
+A {
+   color:black;
+   text-decoration:none
+}
+P {
+   font-size:10px
+}
+TABLE {
+   background-color:SlateGray;
+   border:0;
+   padding:3;
+   text-align:center;
+}

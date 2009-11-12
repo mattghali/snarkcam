@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>{{ config.apptitle }}</title>
+        <meta name="viewport" content="initial-scale=0.925" />
+        <LINK REL=StyleSheet HREF="{{ config.baseurl }}/cam.css">
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td width=20 bgcolor="DarkGray"><a href="{{ config.baseurl }}:{{ config.port }}/?cam={{ args['prev_idx'] }}&mode={{ args['mode'] }}" title="{{ args['prev_cam'].name }}">&larr;</a></td>
+                <td colspan=3>{{ cam.name }}</td>
+                <td width=20 bgcolor="DarkGray"><a href="{{ config.baseurl }}:{{ config.port }}/?cam={{ args['next_idx'] }}&mode={{ args['mode'] }}" title="{{ args['next_cam'].name }}">&rarr;</a></td>
+            </tr>
+            <tr>
+                <td colspan=5><img src="{{ args['active_url'] }}" {{ args['imgsize'] }}></td>
+            </tr>
+            <tr>
+                <td colspan=2></td>
+                <td width=98 bgcolor="DarkGray">
+                    <a href="{{ args['alt_url'] }}" title="{{ args['alt_txt'] }}">{{ args['alt_txt'] }}</a>
+                </td>
+                <td colspan=2></td>
+            </tr>
+            <tr height=20>
+                <td colspan=5>
+                    <p>
+                        <a href="{{ cam.rtsp }}" target="r" title="Only works on the local LAN">rtsp (local)</a>
+                        &nbsp;&nbsp;
+                        <a href="{{ cam.mpeg }}" target="v" title="URL to paste into VLC">mpeg4</a>
+                    </p>
+                </td>
+            </tr>
+            {% if cam.ptz %}
+            <tr>
+                <td colspan=5>
+                     <iframe src="{{ config.baseurl }}:{{ config.port }}/?cam={{ args['next_idx'] }}&mode={{ args['mode'] }}&ptzframe=True" frameborder=no width=98 height=98>
+                </td>
+            </tr>
+            {% end %}
+        </table>
+    </body>
+</html>
