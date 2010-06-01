@@ -62,7 +62,8 @@ if __name__ == '__main__':
         t = Time()
         ss = SunriseSunset(t.dt, lat, lon, zenith='official')
     
-        if not ss.isNight(collar=collar):
+        # isNight() seems to return False at night!
+        if ss.isNight(collar=collar):
             pid = os.spawnv(os.P_NOWAIT, vlcbin, vlcargs)
             time.sleep(interval)
             os.kill(pid, signal.SIGTERM)
