@@ -37,6 +37,7 @@ class NullDevice:
 class Time(object):
     def __init__(self):
         self.t = time.localtime()
+        self.dt = datetime.now(tz)
         self.year = time.strftime('%Y', self.t)
         self.month = time.strftime('%B', self.t)
         self.day = time.strftime('%d', self.t)
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     
     while True:
         t = Time()
-        ss = SunriseSunset(datetime.now(tz), lat, lon, zenith='official')
+        ss = SunriseSunset(t.dt, lat, lon, zenith='official')
     
         if not ss.isNight(collar=collar):
             pid = os.spawnv(os.P_NOWAIT, vlcbin, vlcargs)
