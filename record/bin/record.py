@@ -6,9 +6,16 @@ import signal
 import sys
 import time
 
+from datetime import datetime
+from pytz import timezone
+from sunrisesunset import SunriseSunset
+
+lat = 37.46
+lon = 122.26
+collar = 15
+tz = timezone('US/Pacific')
+
 interval = 600
-sunrise = 06
-sunset = 17
 basedir  = '/data/record'
 vlcbin = '/usr/bin/vlc'
 vlcargs =  "vlc --quiet -I dummy --vlm-conf /etc/vlm-record.conf".split()
@@ -52,8 +59,9 @@ if __name__ == '__main__':
     
     while True:
         t = Time()
+        ss = SunriseSunset(datetime.now(tz), lat, lon, zenith='official')
     
-        if int(t.hour) >= sunrise and int(t.hour) < sunset:
+        if not ss.isNight(collar=collar):
             pid = os.spawnv(os.P_NOWAIT, vlcbin, vlcargs)
             time.sleep(interval)
             os.kill(pid, signal.SIGTERM)
