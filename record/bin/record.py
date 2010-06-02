@@ -10,9 +10,9 @@ from datetime import datetime
 from pytz import timezone
 from sunrisesunset import SunriseSunset
 
-lat = 37.46
-lon = 122.26
-collar = 15
+lat = 37.775
+lon = -122.41833
+collar = 30
 tz = timezone('US/Pacific')
 
 interval = 600
@@ -62,8 +62,7 @@ if __name__ == '__main__':
         t = Time()
         ss = SunriseSunset(t.dt, lat, lon, zenith='official')
     
-        # isNight() seems to return False at night!
-        if ss.isNight(collar=collar):
+        if not ss.isNight(collar=collar):
             pid = os.spawnv(os.P_NOWAIT, vlcbin, vlcargs)
             time.sleep(interval)
             os.kill(pid, signal.SIGTERM)
