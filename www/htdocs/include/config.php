@@ -11,7 +11,8 @@ $cams[] = array('name' => 'camera 0',
                 'mjpg' => 'http://cam.example.com/img0/video.mjpeg',
                 'rtsp' => 'rtsp://webcam0.example.com/img/video.sav',
                 'mpeg' => 'http://cam.example.com:8080/',
-                'ptz'  =>  false
+                'ptz'  =>  false,
+                'pvt'  =>  false
 );
 
 $cams[] = array('name' => 'camera 1',
@@ -19,7 +20,8 @@ $cams[] = array('name' => 'camera 1',
                 'mjpg' => 'http://cam.example.com/img1/video.mjpeg',
                 'rtsp' => 'rtsp://webcam1.example.com/img/video.sav',
                 'mpeg' => 'http://cam.example.com:8081/',
-                'ptz'  => 'http://webcam1.example.com/pt/ptctrl.cgi'
+                'ptz'  => 'http://webcam1.example.com/pt/ptctrl.cgi',
+                'pvt'  =>  true
 );
 
 ?>

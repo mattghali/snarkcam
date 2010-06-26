@@ -11,6 +11,7 @@ $name = $cams[$cam]['name'];
 $rtsp = $cams[$cam]['rtsp'];
 $mpeg = $cams[$cam]['mpeg'];
 $ptz  = $cams[$cam]['ptz'];
+$pvt  = $cams[$cam]['pvt'];
 
 # define 'previous' cam if exists
 if ( isset($cams[$cam - 1]) ) {

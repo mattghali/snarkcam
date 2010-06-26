@@ -55,7 +55,17 @@ if ( isset($next) ) {
             <tr>
 <?php
 # display jpeg/mjpeg
-print "                <td colspan=5><img src=\"$image\" $imgsize></td>\n";
+if ($pvt) {
+    if ($authed) {
+        print "                <td colspan=5><img src=\"$image\" $imgsize></td>\n";
+    } else {
+        print "                <td colspan=5 $imgsize bgcolor=black>\n";
+        print "                    <font color=\"white\">disabled</font>\n";
+        print "                </td>\n";
+    }
+} else {
+    print "                <td colspan=5><img src=\"$image\" $imgsize></td>\n";
+}
 ?>
             </tr>
             <tr>
