@@ -16,9 +16,11 @@ collar = 30
 tz = timezone('US/Pacific')
 
 interval = 600
-basedir  = '/data/record'
+basedir  = '/home/data/record'
 vlcbin = '/usr/bin/vlc'
-vlcargs =  "vlc --quiet -I dummy --vlm-conf /etc/vlm-record.conf".split()
+vlcargs =  "vlc --quiet -I dummy --vlm-conf".split()
+dayconf = '/etc/vlm-day.conf'
+nightconf = '/etc/vlm-night.conf'
 
 try:
     os.stat(basedir)
@@ -61,22 +63,24 @@ if __name__ == '__main__':
     while True:
         t = Time()
         ss = SunriseSunset(t.dt, lat, lon, zenith='official')
+        args = vlcargs
     
-        if not ss.isNight(collar=collar):
-            pid = os.spawnv(os.P_NOWAIT, vlcbin, vlcargs)
-            time.sleep(interval)
-            os.kill(pid, signal.SIGTERM)
-            os.waitpid(pid, 0)
-            
-            destdir = os.path.join(basedir, t.year, t.month, t.day, t.hour)
-            try:
-                os.stat(destdir)
-            except OSError:
-                os.makedirs(destdir)
-
-            for file in glob.glob('*.mov'):
-                os.rename(file,'%s/%s:%s-%s' % (destdir, t.hour, t.min, file))
-    
+        if ss.isNight(collar=collar):
+            args.append(nightconf)
         else:
-            time.sleep(interval)
+            args.append(dayconf)
+
+        pid = os.spawnv(os.P_NOWAIT, vlcbin, args)
+        time.sleep(interval)
+        os.kill(pid, signal.SIGTERM)
+        os.waitpid(pid, 0)
+            
+        destdir = os.path.join(basedir, t.year, t.month, t.day, t.hour)
+        try:
+            os.stat(destdir)
+        except OSError:
+            os.makedirs(destdir)
+
+        for file in glob.glob('*.mov'):
+            os.rename(file,'%s/%s:%s-%s' % (destdir, t.hour, t.min, file))
     
