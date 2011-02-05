@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import copy
 import glob
 import os
 import signal
@@ -63,7 +64,7 @@ if __name__ == '__main__':
     while True:
         t = Time()
         ss = SunriseSunset(t.dt, lat, lon, zenith='official')
-        args = vlcargs
+        args = copy.copy(vlcargs)
     
         if ss.isNight(collar=collar):
             args.append(nightconf)
