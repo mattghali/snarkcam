@@ -1,0 +1,1 @@
+Snark Cam consists of code that presents a web-based UI to view multiple IP webcams, as well as code to record these streams to disk. The code supports Linksys cameras, but should be easy to adapt to other cameras as well.
