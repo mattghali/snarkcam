@@ -31,7 +31,7 @@ if ( isset($_GET['cycle']) ) {
 <?php
 # display 'prev' nav arrow if needed
 if ( isset($prev) ) {
-    $url = "$baseurl/?cam=$prev&mode=$mode";
+    $url = "?cam=$prev&mode=$mode";
     $prevname = $cams[$prev]['name'];
     print "                <td width=20 bgcolor=\"DarkGray\"><a href=\"$url\" title=\"$prevname\">&larr;</a></td>\n";
 } else {
@@ -43,7 +43,7 @@ print "                <td colspan=3>$name</td>\n";
 
 # display 'next' nav arrow if needed
 if ( isset($next) ) {
-    $url = "$baseurl/?cam=$next&mode=$mode";
+    $url = "?cam=$next&mode=$mode";
     $nextname = $cams[$next]['name'];
     print "                <td width=20 bgcolor=\"DarkGray\"><a href=\"$url\" title=\"$nextname\">&rarr;</a></td>\n";
 } else {
@@ -74,9 +74,9 @@ if ($pvt) {
 <?php
 # play/pause button
 if ( $mode == 'play' ) {
-    print "                    <a href=\"$baseurl/?cam=$cam\" title=\"display still jpeg\">pause video</a>\n";
+    print "                    <a href=\"?cam=$cam\" title=\"display still jpeg\">pause</a>\n";
 } else {
-    print "                    <a href=\"$baseurl/?cam=$cam&mode=play\" title=\"play motion jpeg\">play video</a>\n";
+    print "                    <a href=\"?cam=$cam&mode=play\" title=\"play motion jpeg\">play</a>\n";
 }
 ?>
                 </td>
@@ -89,9 +89,9 @@ if ($authed) {
     print "                <td colspan=5>\n";
     print "                    <p>\n";
     print "                        cycle: \n";
-    print "                        <a href=\"$baseurl/?cam=$cam&mode=$mode\" title=\"stop cycling\">off</a>\n";
+    print "                        <a href=\"?cam=$cam&mode=$mode\" title=\"stop cycling\">off</a>\n";
     foreach ( array(15, 30, 60) as $i ) {
-        print "                        <a href=\"$baseurl/?cam=$cam&mode=$mode&cycle=$i\" title=\"cycle through all cameras at a $i second interval\">$i</a>\n";
+        print "                        <a href=\"?cam=$cam&mode=$mode&cycle=$i\" title=\"cycle through all cameras at a $i second interval\">$i</a>\n";
     }
     print "                    </p>\n";
     print "                </td>\n";
@@ -113,7 +113,7 @@ if ( isset($_GET['debug']) ) {
 if ($ptz && $authed) {
     print "            <tr>\n";
     print "                <td colspan=5>\n";
-    print "                        <iframe src=\"$baseurl/?cam=$cam&mode=$mode&ptzframe\" frameborder=no width=98 height=98>\n";
+    print "                        <iframe src=\"?cam=$cam&mode=$mode&ptzframe\" frameborder=no width=98 height=98>\n";
     print "                </td>\n";
     print "            </tr>\n";
 }
