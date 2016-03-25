@@ -8,8 +8,6 @@ if ( isset($_GET['cam']) && isset($cams[$_GET['cam']])) {
 
 # shorter variable names from the config array.
 $name = $cams[$cam]['name'];
-$rtsp = $cams[$cam]['rtsp'];
-$mpeg = $cams[$cam]['mpeg'];
 $ptz  = $cams[$cam]['ptz'];
 $pvt  = $cams[$cam]['pvt'];
 
@@ -63,25 +61,4 @@ if ( isset($_COOKIE[$cookiename])  && ($_COOKIE[$cookiename] == $cookiepass)) {
     $authed = false;
 }
 
-if ($authed) {
-    # check if vlc proxy is running
-    exec('pgrep -f vlm' . $cam, $out, $ret);
-    if ($ret) {
-        $vlcstatus = 'off';
-    } else {
-        $vlcstatus = 'on';
-    }
-
-    # toggle vlc proxy state - this prevents more than one per cam from being run
-    if ( isset($_GET['vlc']) ) {
-        if ( $vlcstatus == 'off' ) {
-            exec('/usr/bin/vlc -I dummy --vlm-conf /etc/vlm' . $cam . '.conf > /dev/null 2>&1 &');
-        } else {
-            exec('pkill -f vlm' . $cam . '.conf');
-        }
-        # leaving vlc get arg in address bar url gets messy.
-        header("Location: $baseurl/?cam=$cam&mode=$mode");
-        exit(0);
-    }
-}
 ?>

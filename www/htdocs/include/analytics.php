@@ -1,4 +1,5 @@
 <?php
+if ( isset($analyticsID ) ) {
 $analyticsScript = <<<END
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -6,9 +7,12 @@ $analyticsScript = <<<END
         </script>
         <script type="text/javascript">
             try {
-                var pageTracker = _gat._getTracker("analytics ID");
+                var pageTracker = _gat._getTracker("$analyticsID");
                 pageTracker._trackPageview();
             } catch(err) {}
         </script>
 END;
+} else {
+    $analyticsScript = "";
+}
 ?>

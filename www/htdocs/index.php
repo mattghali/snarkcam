@@ -88,11 +88,6 @@ if ($authed) {
     print "            <tr height=20>\n";
     print "                <td colspan=5>\n";
     print "                    <p>\n";
-    print "                        <a href=\"$rtsp\" target=\"r\" title=\"Only works on the local LAN\">rtsp (local)</a>\n";
-    print "                        &nbsp;&nbsp;\n";
-    print "                        <a href=\"$mpeg\" target=\"v\" title=\"URL to paste into VLC\">mpeg4</a>\n";
-    print "                        <a href=\"$baseurl/?cam=$cam&mode=$mode&vlc\" title=\"Turn the http stream server on/off\">($vlcstatus)</a>\n";
-    print "                        &nbsp;&nbsp;\n";
     print "                        cycle: \n";
     print "                        <a href=\"$baseurl/?cam=$cam&mode=$mode\" title=\"stop cycling\">off</a>\n";
     foreach ( array(15, 30, 60) as $i ) {
